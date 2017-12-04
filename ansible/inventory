@@ -1,0 +1,9 @@
+# Vagrantbox
+[all]
+default ansible_connection=local
+
+[zoo]
+zoo ansible_connection=local
+
+[default]
+default ansible_connection=local

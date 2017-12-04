@@ -1,0 +1,11 @@
+---
+# tasks build and install zoo
+
+- name: Install a .deb package
+  apt:
+    deb: /home/vagrant/zookeeper_conf-master/builder/zookeeper.deb
+
+- name: test
+  raw: /opt/zookeeper-3.4.11/bin/zkServer.sh status
+
+

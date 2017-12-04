@@ -1,0 +1,46 @@
+---
+# tasks build and install zoo
+
+- name: Update packages
+  apt:
+    update_cache: yes
+
+- name: Installing java
+  apt: package=openjdk-7-jre state=installed force=yes
+
+- name: Installing necessary packages
+  apt: package={{item}} state=installed force=yes
+  with_items:
+    - curl
+    - unzip
+    - wget
+    - apt-transport-https
+    - ca-certificates
+    - git-core
+    - language-pack-ru
+    - python-dev
+    - libzookeeper-mt-dev
+
+
+- name: Download zooconf
+  get_url: url="https://github.com/dtulyakov/zookeeper_conf/archive/master.zip" dest="~/master.zip" force="yes"
+
+- name: Download zookeeper
+  get_url: url="https://www.apache.org/dist/zookeeper/zookeeper-3.4.11/zookeeper-3.4.11.tar.gz" dest="~/zookeeper-3.4.11.tar.gz" force="yes" validate_certs="no"
+
+- name: Unarchive zooconf
+  unarchive: copy=no src="~/master.zip" dest="/home/vagrant" owner="vagrant" group="vagrant"
+
+- name: Unarchive zookeeper
+  unarchive: copy=no src="~/zookeeper-3.4.11.tar.gz" dest="/home/vagrant/zookeeper_conf-master/builder/zookeeper/opt" owner="vagrant" group="vagrant"
+
+- name: Copy zoo conf
+  copy: remote_src=True src=/home/vagrant/zookeeper_conf-master/zoo.cfg dest=/home/vagrant/zookeeper_conf-master/builder/zookeeper/opt/zookeeper-3.4.11/conf/zoo.cfg owner="vagrant" group="vagrant"
+
+- name: remove keep
+  file: path=/home/vagrant/zookeeper_conf-master/builder/zookeeper/opt/.keep state=absent
+
+- name: build deb packages
+  raw: cd /home/vagrant/zookeeper_conf-master/builder && fakeroot dpkg-deb --build zookeeper
+
+
