@@ -7,5 +7,5 @@ vagrant ssh
 ```bash
 
 vagrant ssh
-/opt/zookeeper-3.4.11/bin/zkCli.sh
+sudo /opt/zookeeper-3.4.11/bin/zkCli.sh
 ```
