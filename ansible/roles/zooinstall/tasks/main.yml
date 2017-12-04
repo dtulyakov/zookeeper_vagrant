@@ -5,7 +5,8 @@
   apt:
     deb: /home/vagrant/zookeeper_conf-master/builder/zookeeper.deb
 
-- name: test
-  raw: /opt/zookeeper-3.4.11/bin/zkServer.sh status
+- name: install smokeping
+  raw: sudo pip install zkpython
 
-
+- name: smoketest
+  raw: /home/vagrant/zk-smoketest-master/zk-smoketest.py
