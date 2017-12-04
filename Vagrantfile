@@ -25,7 +25,7 @@ Vagrant.configure(2) do |config|
     ansible.playbook = "ansible/playbook.yml"
     ansible.inventory_path = "ansible/inventory"
     ansible.sudo = true
-    ansible.verbose = "vvv"
+    ansible.verbose = ""
   end
 
   config.vm.provision "shell", inline: "netstat -lntp", run: "always"
