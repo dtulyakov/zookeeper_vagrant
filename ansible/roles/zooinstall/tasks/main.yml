@@ -7,6 +7,3 @@
 
 - name: install smokeping
   raw: sudo pip install zkpython
-
-- name: smoketest
-  raw: /home/vagrant/zk-smoketest-master/zk-smoketest.py
