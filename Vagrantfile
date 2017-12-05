@@ -28,6 +28,6 @@ Vagrant.configure(2) do |config|
     ansible.verbose = ""
   end
 
-  config.vm.provision "shell", inline: "netstat -lntp", run: "always"
+  config.vm.provision "shell", inline: "/home/vagrant/zk-smoketest-master/zk-smoketest.py", run: "always"
 
 end
